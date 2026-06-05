@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shadow RP Checkout</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+min-height:100vh;
+}
+
+.navbar{
+background:#111827;
+padding:15px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+color:#facc15;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+box-shadow:0 0 15px rgba(0,0,0,.5);
+}
+
+h2{
+color:#facc15;
+margin-bottom:15px;
+}
+
+.payment-box{
+text-align:center;
+padding:30px;
+background:#111827;
+border-radius:15px;
+}
+
+.payment-number{
+font-size:40px;
+font-weight:bold;
+color:#22c55e;
+margin:15px 0;
+}
+
+input,
+textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+background:#0f172a;
+color:white;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:10px;
+background:#facc15;
+color:black;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+opacity:.9;
+}
+
+.success{
+display:none;
+margin-top:15px;
+padding:15px;
+background:#14532d;
+border-radius:10px;
+text-align:center;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="navbar">
+🎮 SHADOW RP CHECKOUT
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>💳 Payment Method</h2>
+
+<div class="payment-box">
+
+<h3>Payment Number</h3>
+
+<div class="payment-number">
+9867535307
+</div>
+
+<p>
+Send payment to this number and then submit your order details below.
+</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>📤 Submit Order</h2>
+
+<form onsubmit="submitOrder(event)">
+
+<input
+type="text"
+id="gameUser"
+placeholder="Game Username"
+required>
+
+<input
+type="text"
+id="discordUser"
+placeholder="Discord Username"
+required>
+
+<input
+type="text"
+id="transactionId"
+placeholder="Transaction ID"
+required>
+
+<textarea
+rows="4"
+placeholder="Additional Information">
+</textarea>
+
+<button type="submit">
+✅ Submit Order
+</button>
+
+</form>
+
+<div
+class="success"
+id="successBox">
+
+🎉 Order Submitted Successfully.
+Waiting For Admin Approval.
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function submitOrder(event){
+
+event.preventDefault();
+
+let orders =
+JSON.parse(
+localStorage.getItem("orders")
+) || [];
+
+orders.push({
+
+id: Date.now(),
+
+gameUser:
+document.getElementById(
+"gameUser"
+).value,
+
+discordUser:
+document.getElementById(
+"discordUser"
+).value,
+
+transactionId:
+document.getElementById(
+"transactionId"
+).value,
+
+status:"Pending",
+
+notification:
+"Waiting for admin approval"
+
+});
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+document.getElementById(
+"successBox"
+).style.display="block";
+
+}
+
+</script>
+
+</body>
+</html> 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shadow RP Invoice</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#0a0a0a;
+    color:white;
+    text-align:center;
+}
+
+.invoice{
+    width:80%;
+    margin:auto;
+    margin-top:30px;
+    padding:20px;
+    border:2px solid cyan;
+    background:rgba(0,0,0,0.8);
+    box-shadow:0 0 20px cyan;
+}
+
+table{
+    width:100%;
+    margin-top:20px;
+    border-collapse:collapse;
+}
+
+th,td{
+    border:1px solid cyan;
+    padding:10px;
+}
+
+.total{
+    margin-top:20px;
+    font-size:20px;
+    color:lime;
+    font-weight:bold;
+}
+
+button{
+    margin-top:20px;
+    padding:10px;
+    background:cyan;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="invoice">
+    <h1>🧾 SHADOW RP INVOICE</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody id="bill"></tbody>
+    </table>
+
+    <div class="total" id="grandTotal"></div>
+
+    <button onclick="clearCart()">PAY & CLEAR CART</button>
+</div>
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function loadBill(){
+
+    let bill = document.getElementById("bill");
+    let total = 0;
+
+    bill.innerHTML = "";
+
+    cart.forEach(item=>{
+
+        let t = item.price * item.qty;
+        total += t;
+
+        bill.innerHTML += `
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.price}</td>
+                <td>${item.qty}</td>
+                <td>${t}</td>
+            </tr>
+        `;
+    });
+
+    document.getElementById("grandTotal").innerText =
+        "TOTAL: " + total + " Coins";
+}
+
+function clearCart(){
+    localStorage.removeItem("cart");
+    alert("Payment Successful!");
+    window.location.href = "shop.html";
+}
+
+loadBill();
+
+</script>
+
+</body>
+</html>

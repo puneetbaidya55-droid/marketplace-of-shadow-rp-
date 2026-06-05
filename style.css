@@ -1,0 +1,206 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+position:relative;
+
+background:
+linear-gradient(
+rgba(0,0,0,.6),
+rgba(0,0,0,.6)
+),
+url("https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1920&auto=format&fit=crop");
+
+background-size:cover;
+background-position:center;
+
+color:white;
+}
+
+.overlay{
+z-index:5;
+max-width:900px;
+padding:20px;
+animation:fadeIn 2s ease;
+}
+
+.logo{
+font-size:90px;
+}
+
+.title{
+font-size:70px;
+font-weight:bold;
+color:#39ff14;
+
+text-shadow:
+0 0 10px #39ff14,
+0 0 20px #39ff14,
+0 0 40px #39ff14,
+0 0 80px #39ff14;
+}
+
+.subtitle{
+font-size:24px;
+margin-top:15px;
+}
+
+.speed{
+font-size:32px;
+margin-top:25px;
+font-weight:bold;
+color:#39ff14;
+}
+
+.speedometer{
+font-size:45px;
+font-weight:bold;
+margin-bottom:25px;
+color:#39ff14;
+}
+
+.btn{
+display:inline-block;
+margin-top:35px;
+padding:18px 45px;
+background:#39ff14;
+color:black;
+font-weight:bold;
+text-decoration:none;
+border-radius:10px;
+transition:.3s;
+}
+
+.btn:hover{
+transform:scale(1.1);
+}
+
+.engine{
+position:absolute;
+bottom:20px;
+width:100%;
+text-align:center;
+font-size:20px;
+color:#39ff14;
+animation:blink 1s infinite;
+z-index:5;
+}
+
+.bike{
+position:absolute;
+bottom:100px;
+font-size:90px;
+z-index:4;
+animation:ride 5s linear forwards;
+}
+
+.rain{
+position:absolute;
+width:100%;
+height:100%;
+top:0;
+left:0;
+
+background-image:
+linear-gradient(
+transparent 90%,
+rgba(255,255,255,.4)
+);
+
+background-size:3px 25px;
+
+animation:rain 0.3s linear infinite;
+z-index:2;
+}
+
+.smoke{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+height:300px;
+
+background:
+radial-gradient(
+circle,
+rgba(255,255,255,.2),
+transparent 70%
+);
+
+animation:smokeMove 8s infinite;
+z-index:3;
+}
+
+@keyframes ride{
+
+0%{
+left:-150px;
+}
+
+100%{
+left:110%;
+}
+
+}
+
+@keyframes rain{
+
+from{
+background-position:0 0;
+}
+
+to{
+background-position:-20px 100px;
+}
+
+}
+
+@keyframes smokeMove{
+
+0%{
+transform:translateY(100px);
+opacity:0;
+}
+
+50%{
+opacity:.5;
+}
+
+100%{
+transform:translateY(-150px);
+opacity:0;
+}
+
+}
+
+@keyframes blink{
+
+50%{
+opacity:.3;
+}
+
+}
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(50px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}

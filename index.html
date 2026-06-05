@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shadowplay RP Marketplace</title>
+
+<style>
+
+/* 🏍️ KAWASAKI H2R BACKGROUND */
+body{
+margin:0;
+font-family:Arial;
+color:white;
+overflow-x:hidden;
+
+/* Replace this with your own image later if you want */
+background:url("https://images.unsplash.com/photo-1558981806-ec527fa84c39") no-repeat center center fixed;
+background-size:cover;
+}
+
+/* 🌌 DARK GAMING OVERLAY */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 30%, rgba(0,255,255,0.2), transparent 40%),
+radial-gradient(circle at 80% 60%, rgba(128,0,255,0.2), transparent 40%),
+linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
+z-index:-1;
+}
+
+/* NAV */
+nav{
+display:flex;
+justify-content:space-between;
+padding:18px 30px;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(10px);
+border-bottom:1px solid cyan;
+}
+
+.logo{
+color:cyan;
+font-weight:bold;
+font-size:22px;
+text-shadow:0 0 10px cyan;
+}
+
+.menu a{
+color:white;
+text-decoration:none;
+margin:0 10px;
+font-weight:bold;
+transition:0.3s;
+}
+
+.menu a:hover{
+color:cyan;
+text-shadow:0 0 10px cyan;
+}
+
+/* HERO */
+.hero{
+text-align:center;
+padding:120px 20px;
+}
+
+.hero h1{
+font-size:65px;
+color:cyan;
+text-shadow:0 0 25px cyan;
+}
+
+.hero p{
+font-size:18px;
+opacity:0.9;
+margin-top:10px;
+}
+
+.enter-btn{
+display:inline-block;
+margin-top:25px;
+padding:15px 35px;
+background:linear-gradient(90deg,cyan,purple);
+color:black;
+font-weight:bold;
+text-decoration:none;
+border-radius:12px;
+transition:0.3s;
+}
+
+.enter-btn:hover{
+transform:scale(1.08);
+box-shadow:0 0 20px cyan;
+}
+
+/* CATEGORY CARDS */
+.categories{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+width:90%;
+margin:50px auto;
+}
+
+.card{
+background:rgba(0,0,0,0.7);
+border:1px solid cyan;
+padding:25px;
+text-align:center;
+border-radius:15px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 25px cyan;
+}
+
+.card h2{
+color:cyan;
+}
+
+/* FOOTER */
+.footer{
+text-align:center;
+padding:30px;
+border-top:1px solid rgba(255,255,255,0.1);
+color:#aaa;
+margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="logo">🏍️ SHADOW RP</div>
+
+<div class="menu">
+<a href="index.html">Home</a>
+<a href="shop.html">Shop</a>
+<a href="checkout.html">Checkout</a>
+</div>
+</nav>
+
+<section class="hero">
+
+<h1>KAWASAKI H2R EXPERIENCE</h1>
+<p>Ride the streets of shadowplay RP with speed, power and style.</p>
+
+<a href="shop.html" class="enter-btn">ENTER MARKETPLACE</a>
+
+</section>
+
+<section class="categories">
+
+<div class="card">
+<h2>🚗 Cars</h2>
+<p>Luxury supercars collection</p>
+</div>
+
+<div class="card">
+<h2>🏍️ Bikes</h2>
+<p>Including Kawasaki Ninja H2R & superbikes</p>
+</div>
+
+<div class="card">
+<h2>🏠 Houses</h2>
+<p>Elite RP properties</p>
+</div>
+
+</section>
+
+<div class="footer">
+© 2026 Shadow RP Marketplace
+</div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shadow RP Login</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:radial-gradient(circle,#1a0033,#000);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.box{
+    padding:30px;
+    border:1px solid cyan;
+    box-shadow:0 0 20px cyan;
+    text-align:center;
+}
+
+input{
+    padding:10px;
+    margin:5px;
+    width:200px;
+}
+
+button{
+    padding:10px;
+    background:cyan;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>🔐 SHADOW RP LOGIN</h2>
+
+    <input id="user" placeholder="Username"><br>
+    <input id="pass" type="password" placeholder="Password"><br>
+
+    <button onclick="login()">ENTER</button>
+</div>
+
+<script>
+
+function login(){
+
+    let u = document.getElementById("user").value;
+    let p = document.getElementById("pass").value;
+
+    if(u && p){
+        localStorage.setItem("loggedIn","true");
+        window.location.href = "shop.html";
+    } else {
+        alert("Enter details!");
+    }
+}
+
+/* block direct shop access */
+if(localStorage.getItem("loggedIn") !== "true"){
+    if(window.location.href.includes("shop.html")){
+        window.location.href = "login.html";
+    }
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function loadCart(){
+
+    let box = document.getElementById("cartBox");
+
+    box.innerHTML = "";
+
+    if(cart.length === 0){
+        box.innerHTML = "<p>Cart Empty</p>";
+        return;
+    }
+
+    cart.forEach((item,index)=>{
+
+        box.innerHTML += `
+        <div style="
+            border:1px solid cyan;
+            padding:8px;
+            margin:5px;
+            border-radius:8px;
+        ">
+            <b>${item.name}</b><br>
+            Price: ${item.price}
+
+            <br><br>
+
+            <button onclick="removeItem(${index})"
+            style="
+                background:red;
+                color:white;
+                border:none;
+                padding:5px 10px;
+                cursor:pointer;
+            ">
+                ❌ Remove
+            </button>
+        </div>
+        `;
+    });
+}
+
+function removeItem(index){
+
+    cart.splice(index,1);
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    loadCart();
+}
+</script>

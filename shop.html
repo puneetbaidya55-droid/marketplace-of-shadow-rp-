@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shadow RP Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:black;
+    color:white;
+}
+
+/* NAV */
+nav{
+    padding:15px;
+    background:rgba(0,0,0,0.7);
+    border-bottom:1px solid cyan;
+    text-align:center;
+}
+
+/* BUTTONS */
+button{
+    padding:10px;
+    margin:5px;
+    background:linear-gradient(90deg,cyan,purple);
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+    color:black;
+    border-radius:6px;
+}
+
+/* PRODUCTS */
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:10px;
+}
+
+.card{
+    width:200px;
+    margin:10px;
+    padding:15px;
+    border:1px solid cyan;
+    text-align:center;
+    background:rgba(255,255,255,0.05);
+    box-shadow:0 0 10px cyan;
+    border-radius:10px;
+}
+
+/* CART UI */
+.cart{
+    position:fixed;
+    top:10px;
+    right:10px;
+    width:220px;
+    background:rgba(0,0,0,0.8);
+    border:1px solid cyan;
+    padding:10px;
+}
+
+.small{
+    font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <h2>🛍️ SHADOW RP SHOP</h2>
+
+    <button onclick="filter('all')">ALL</button>
+    <button onclick="filter('cars')">🚗 CARS</button>
+    <button onclick="filter('bikes')">🏍️ BIKES</button>
+    <button onclick="filter('houses')">🏠 HOUSES</button>
+    <button onclick="filter('water')">🚤 WATER VEHICLES</button>
+    <button onclick="filter('air')">✈️ AIR VEHICLES</button>
+    <button onclick="filter('rare')">💎 RARE</button>
+
+    <!-- ⚡ ONE CLICK CHECKOUT -->
+    <button onclick="goCheckout()">🛒 CHECKOUT</button>
+</nav>
+
+<!-- CART -->
+<div class="cart">
+    <h3>🛒 CART</h3>
+    <div id="cartBox" class="small"></div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="container" id="products"></div>
+
+<script>
+
+/* SAFE DATA */
+let products = JSON.parse(localStorage.getItem("products")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+/* LOAD PRODUCTS */
+function loadProducts(){
+
+    let box = document.getElementById("products");
+    box.innerHTML = "";
+
+    if(products.length === 0){
+        box.innerHTML = "<h3>No Products Found</h3>";
+        return;
+    }
+
+    products.forEach((p,i)=>{
+
+        box.innerHTML += `
+        <div class="card item" data-category="${p.category || 'none'}">
+
+            <h3>${p.name}</h3>
+            <p>${p.price} Coins</p>
+            <p>${p.category}</p>
+
+            <button onclick="addToCart(${i})">ADD</button>
+
+        </div>
+        `;
+    });
+}
+
+/* FILTER */
+function filter(cat){
+
+    let items = document.querySelectorAll(".item");
+
+    items.forEach(i=>{
+        let c = i.getAttribute("data-category");
+
+        if(cat === "all"){
+            i.style.display = "block";
+        }
+        else if(c === cat){
+            i.style.display = "block";
+        }
+        else{
+            i.style.display = "none";
+        }
+    });
+}
+
+/* ADD TO CART */
+function addToCart(i){
+    cart.push(products[i]);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+}
+
+/* CART DISPLAY */
+function loadCart(){
+
+    let box = document.getElementById("cartBox");
+    box.innerHTML = "";
+
+    if(cart.length === 0){
+        box.innerHTML = "Empty Cart";
+        return;
+    }
+
+    cart.forEach(c=>{
+        box.innerHTML += `<div>${c.name} - ${c.price}</div>`;
+    });
+}
+
+/* CHECKOUT */
+function goCheckout(){
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if(cart.length === 0){
+        alert("Cart is empty!");
+        return;
+    }
+
+    window.location.href = "checkout.html";
+}
+
+/* INIT */
+loadProducts();
+loadCart();
+
+</script>
+
+</body>
+</html>
