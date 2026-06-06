@@ -13,8 +13,6 @@ margin:0;
 font-family:Arial;
 color:white;
 overflow-x:hidden;
-
-/* Replace this with your own image later if you want */
 background:url("https://images.unsplash.com/photo-1558981806-ec527fa84c39") no-repeat center center fixed;
 background-size:cover;
 }
@@ -42,6 +40,8 @@ padding:18px 30px;
 background:rgba(0,0,0,0.5);
 backdrop-filter:blur(10px);
 border-bottom:1px solid cyan;
+flex-wrap:wrap;
+gap:10px;
 }
 
 .logo{
@@ -133,6 +133,46 @@ padding:30px;
 border-top:1px solid rgba(255,255,255,0.1);
 color:#aaa;
 margin-top:40px;
+}
+
+/* 📱 MOBILE RESPONSIVE FIX (ADDED ONLY) */
+@media (max-width: 768px){
+
+.hero{
+padding:80px 15px;
+}
+
+.hero h1{
+font-size:38px;
+}
+
+.hero p{
+font-size:15px;
+}
+
+.enter-btn{
+padding:12px 25px;
+font-size:14px;
+}
+
+nav{
+flex-direction:column;
+text-align:center;
+}
+
+.menu a{
+display:inline-block;
+margin:8px;
+}
+
+.categories{
+grid-template-columns:1fr;
+width:95%;
+}
+
+.card{
+padding:20px;
+}
 }
 
 </style>
